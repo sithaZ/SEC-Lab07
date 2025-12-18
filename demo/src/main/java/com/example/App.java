@@ -33,7 +33,7 @@ public class App {
         System.out.println("--- DB Connection Pool Demo ---");
         DBConnectionPool dbConnectionPool = new DBConnectionPool();
         // Start 10 threads, but only 3 can connect simultaneously
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             final int threadId = i;
             new Thread(() -> dbConnectionPool.databaseConnection(threadId)).start();    
         }
@@ -47,7 +47,7 @@ public class App {
         // ==========================================
         System.out.println("--- Task 2: Producer Consumer ---");
         ProducerConsumer pc = new ProducerConsumer();
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 2; i++) {
             pc.produce(i); // Using your existing produce(int) method
             new Thread(() -> {
                 try {
@@ -97,12 +97,12 @@ public class App {
         rw.write("Key1", "Init");
 
         new Thread(() -> {
-            for (int i = 0; i < 3; i++) rw.write("Key1", "Update-" + i);
+            for (int i = 0; i < 1; i++) rw.write("Key1", "Update-" + i);
         }).start();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             new Thread(() -> {
-                for (int j = 0; j < 3; j++) rw.read("Key1");
+                for (int j = 0; j < 1; j++) rw.read("Key1");
             }).start();
         }
         Thread.sleep(3000); // Wait for RW demo to finish

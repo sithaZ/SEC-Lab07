@@ -26,7 +26,7 @@ public class DiningPhilosophers {
 
       
         try {
-            Thread.sleep(120000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
